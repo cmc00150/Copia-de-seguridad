@@ -12,7 +12,7 @@
 #	Orchis theme (dracula version)
 #	Oh my posh
 
-listaSnap=(brave clion spotify gedit steam mindustry)
+listaSnap=(brave "--classic clion" spotify gedit steam mindustry)
 listaFlatpak=(org.gnome.design.Emblem com.rafaelmardojai.Blanket io.github.nokse22.asciidraw dev.geopjr.Calligraphy io.gitlab.gregorni.Letterpress dev.geopjr.Collision com.mattjakeman.ExtensionManager md.obsidian.Obsidian com.github.PintaProject.Pinta)
 
 read -p "Bienvenido al instalador de recuperación Ringo ¿Desea proceder a la recuperación o quiere añadir algún programa? (recu/prog): " respuesta
@@ -32,7 +32,7 @@ if [[ ${respuesta} == "recu" ]]; then
 ##### Install aplicaciones de snap
 	for snapApp in "${listaSnap[@]}"; do
 		echo "################### DESCARGANDO ${snapApp} ###################"
-		snap install snapApp
+		snap install ${snapApp} 
 	done
 
 ##### Instalación flatpak y flathub	
@@ -43,6 +43,7 @@ if [[ ${respuesta} == "recu" ]]; then
 	for flatpakApp in "${listaFlatpak[@]}"; do
 		echo "################### DESCARGANDO ${flatpakApp} ###################"
 		flatpak install flathub ${flatpakApp} -y
+	done
 
 ##### Instalar tweaks
 	sudo apt install gnome-tweaks
@@ -59,13 +60,15 @@ if [[ ${respuesta} == "recu" ]]; then
 	unzip -o extensiones ~/.local/share/gnome-shell
 
 ##### Instalar Orchis theme
-	if [ dpkg -l git | awk '/git/ {print 1}' -eq 1 ]; then
+	if [ $(which git) = "" ]; then
 		sudo apt install git
 	fi
 	
-	git clone
+	git clone https://github.com/vinceliuice/Orchis-theme.git
+	
+	
 
-	./install.sh -l -t grey -c dark -s standard --tweaks macos submenu dracula dock --shell 46
+	Orchis-theme/install.sh -l -t grey -c dark -s standard --tweaks macos submenu dracula dock --shell 46
 	exit
 fi
 

@@ -50,14 +50,15 @@ if [[ ${respuesta} == "recu" ]]; then
 
 ##### Instalar extensiones del gestor de gnome
 	mkdir -p /home/cesar/.local/share/gnome-shell
-	extensiones=$(find -name Extensiones.zip)
+	extensiones=$(find -name Extensions.zip)
 
 	if [[ $extensiones == "" ]]; then
 		echo "Error no se ha encontrado el .zip Extensiones"
 		exit
 	fi
-	
-	unzip -o extensiones ~/.local/share/gnome-shell
+
+ 	mkdir -p ~/.local/share/gnome-shell
+	unzip -o Extensions.zip -d ~/.local/share/gnome-shell
 
 ##### Instalar Orchis theme
 	if [ $(which git) = "" ]; then
